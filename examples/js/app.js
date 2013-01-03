@@ -3,8 +3,17 @@
   var User = Backbone.Model.extend({
   });
 
+  var Users = Backbone.Collection.extend({
+    model: User
+  });
+
   var AppView = Backbone.HandlebarsView.extend({
-    template: '<h1>Hello</h1>{{view "HelloView" model=this}}'
+    template: '<h1>Hello</h1>'                                  +
+              '<ul>'                                            +
+              ' {{#each this}}'                                 +
+              '   {{view "HelloView" model=this tagName="li"}}' +
+              ' {{/each}}'                                      +
+              '</ul>'
   });
 
   var HelloView = Backbone.HandlebarsView.extend({
@@ -13,7 +22,8 @@
   });
   window.HelloView = HelloView;
 
-  var app = new AppView({model: new User({name: 'Loïc'})});
+  var users = new Users([new User({name: 'Riri'}), new User({name: 'Fifi'}), new User({name: 'Loulou'})]);
+  var app = new AppView({collection: users});
   app.render().$el.appendTo('#app');
 
 })(Backbone);
