@@ -8,6 +8,7 @@
   });
 
   var HelloView = Backbone.HandlebarsView.extend({
+    tagName: 'p',
     template: 'Hello {{name}}'
   });
   window.HelloView = HelloView;
