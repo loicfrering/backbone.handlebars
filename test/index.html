@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>backbone.handlebars tests</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="libs/mocha.css" />
+  </head>
+  <body>
+    <div id="mocha"></div>
+
+    <script src="../examples/js/libs/jquery.min.js"></script>
+    <script src="../examples/js/libs/underscore.min.js"></script>
+    <script src="../examples/js/libs/backbone.js"></script>
+    <script src="../examples/js/libs/handlebars.js"></script>
+
+    <script src="../src/HandlebarsExt.js"></script>
+    <script src="../src/HandlebarsView.js"></script>
+
+    <script src="libs/chai.js"></script>
+    <script src="libs/mocha.js"></script>
+    <script>
+      mocha.setup('bdd')
+      var should = chai.should();
+    </script>
+
+    <script src="../node_modules/grunt-mocha/tasks/mocha/mocha-helper.js"></script>
+
+    <script src="ext.js"></script>
+    <script src="view.js"></script>
+    <script>
+      if (window.mochaPhantomJS) {
+        mochaPhantomJS.run();
+      } else {
+        mocha.run();
+      }
+    </script>
+  </body>
+</html>
