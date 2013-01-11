@@ -14,5 +14,7 @@ function resolveViewClass(name, callback) {
     callback(window[name]);
   } else if (typeof require !== 'undefined') {
     require(name, callback);
+  } else {
+    throw new Error('Cannot resolve view "' + name + '"');
   }
 }

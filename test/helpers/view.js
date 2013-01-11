@@ -59,6 +59,11 @@ describe('Helpers', function() {
 
         window.require = undefined;
       });
+
+      it('should throw an error for an unresolvable view', function() {
+        var fn = Handlebars.compile('{{view "MyView"}}');
+        fn.should.throw(Error);
+      });
     });
   });
 });
