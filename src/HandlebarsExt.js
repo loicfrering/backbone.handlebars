@@ -6,7 +6,8 @@ Handlebars.JavaScriptCompiler.prototype.nameLookup = function(parent, name, type
 
 Handlebars.registerHelper('view', function(name, options) {
   var view = new window[name](options.hash);
-  return new Handlebars.SafeString(view.render().$el[0].outerHTML);
+  view.render();
+  return new Handlebars.SafeString(view.$el[0].outerHTML);
 });
 
 Handlebars.registerHelper('each', function(context, options) {
