@@ -10,11 +10,17 @@ Handlebars.registerHelper('view', function(name, options) {
 });
 
 function resolveViewClass(name, callback) {
-  if (window[name]) {
-    callback(window[name]);
-  } else if (typeof require !== 'undefined') {
-    require(name, callback);
-  } else {
-    throw new Error('Cannot resolve view "' + name + '"');
+  if (_.isFunction(name)) {
+    callback(name);
+    return;
+  } else if (_.isString(name)) {
+    if (window[name]) {
+      callback(window[name]);
+      return;
+    } else if (typeof require !== 'undefined') {
+      require(name, callback);
+      return;
+    }
   }
+  throw new Error('Cannot resolve view "' + name + '"');
 }

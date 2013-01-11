@@ -60,6 +60,17 @@ describe('Helpers', function() {
         window.require = undefined;
       });
 
+      it('should directly instantiate a view class available in the context', function() {
+        var MyView = Backbone.View.extend({
+          render: function() {
+            this.$el.html('Hello World!');
+          }
+        });
+
+        var fn = Handlebars.compile('{{view MyView}}');
+        fn({MyView: MyView}).should.equal('<div>Hello World!</div>');
+      });
+
       it('should throw an error for an unresolvable view', function() {
         var fn = Handlebars.compile('{{view "MyView"}}');
         fn.should.throw(Error);
