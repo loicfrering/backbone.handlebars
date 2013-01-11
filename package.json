@@ -1,0 +1,27 @@
+{
+  "name": "backbone.handlebars",
+  "version": "0.1.0",
+  "author": "Loïc Frering <loic.frering@gmail.com>",
+  "description": "Backbone <3 Handlebars",
+  "keywords": [
+    "front-end",
+    "web",
+    "backbone",
+    "handlebars"
+  ],
+  "homepage": "http://loicfrering.github.com/backbone.handlebars/",
+  "bugs": "https://github.com/loicfrering/backbone.handlebars/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/loicfrering/backbone.handlebars.git"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.3",
+    "grunt-mocha": "~0.1"
+  },
+  "license": "MIT"
+}
