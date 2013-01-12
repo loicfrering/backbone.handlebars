@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Backbone.Handlebars</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/solarized_dark.min.css" />
+  <style>
+    body {
+      margin: 0 auto;
+      margin-top: 120px;
+      padding: 0 20px;
+      max-width: 1024px;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background-color: #eee;
+      color: #444;
+    }
+
+    h1 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      margin: 0;
+      padding: 30px 0;
+      background-color: white;
+      font-weight: normal;
+      text-align: center;
+      z-index: -1;
+    }
+
+    h2 {
+      padding-bottom: 4px;
+      border-bottom: solid 1px;
+    }
+
+    a {
+      color: #08c;
+      text-decoration: none;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    code {
+      overflow-x: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="https://github.com/loicfrering/backbone.handlebars"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
+
+  <h1>Backbone.Handlebars</h1>
+<p>Backbone.Handlebars provides a solid integration of Handlebars into Backbone with:
+
+</p>
+<ul>
+<li>Support for Backbone.Model: <code>{{user.name}}</code> compiles to <code>user.get(&#39;name&#39;)</code></li>
+<li>Support for Backbone.Collection: the <code>each</code> helper is able to iterate through
+a Backbone.Collection.</li>
+<li>Nested views: <code>&lt;h1&gt;User details&lt;/h1&gt;{{view UserView model=user}}</code></li>
+<li>HandlebarsView: an extended BackboneView that automate the rendering of your
+empowered Handlebars templates.</li>
+</ul>
+<h2>Support for Backbone.Model</h2>
+<p>Backbone.Handlebars extends Handlebars to support fetching Backbone.Model
+attributes through <code>model.get(attribute)</code>:
+
+</p>
+<pre><code class="lang-javascript"><span class="keyword">var</span> user = <span class="keyword">new</span> Backbone.Model({name: <span class="string">'World'</span>});
+<span class="keyword">var</span> fn = Handlebars.compile(<span class="string">'Hello {{name}}!'</span>);
+fn(user);
+<span class="comment">// Hello World!</span></code></pre>
+<p>Notice that we directly pass the user as context and not <code>user.toJSON()</code>.
+Instead of using the dot notation <code>user.name</code>, it will detect that we are
+managing a Backbone.Model and use <code>user.get(&#39;name&#39;)</code>.
+
+</p>
+<h2>Support for Backbone.Collection</h2>
+<p>Backbone.Handlebars override the default <code>each</code> helper to support looping
+through a Backbone.Collection:
+
+</p>
+<pre><code class="lang-javascript"><span class="keyword">var</span> numbers = <span class="keyword">new</span> Backbone.Collection([<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three'</span>, <span class="string">'four'</span>]);
+<span class="keyword">var</span> fn = Handlebars.compile(<span class="string">'&lt;ul&gt;{{#each numbers}}&lt;li&gt;{{number}}&lt;/li&gt;{{/each}}&lt;/ul&gt;'</span>);
+fn({numbers: numbers});
+<span class="comment">// &lt;ul&gt;&lt;li&gt;one&lt;/li&gt;&lt;li&gt;two&lt;/li&gt;&lt;li&gt;three&lt;/li&gt;&lt;li&gt;four&lt;/li&gt;&lt;/ul&gt;</span></code></pre>
+<h2>Nested views</h2>
+<pre><code class="lang-javascript"><span class="keyword">var</span> HelloView = Backbone.View.extend({
+  render: <span class="keyword">function</span>() {
+    <span class="keyword">this</span>.$el.html(<span class="string">'Hello '</span> + <span class="keyword">this</span>.model.get(<span class="string">'name'</span>) + <span class="string">'!'</span>);
+  }
+});
+
+<span class="keyword">var</span> fn = Handlebars.compile(<span class="string">'{{view HelloView model=user tagName="h1"}}'</span>);
+fn({
+  user: {name: <span class="string">'World'</span>},
+  HelloView: HelloView
+});
+<span class="comment">// &lt;h1&gt;Hello World!&lt;/h1&gt;</span></code></pre>
+<h2>HandlebarsView</h2>
+<pre><code class="lang-javascript"><span class="keyword">var</span> User = Backbone.Model.extend();
+
+<span class="keyword">var</span> AppView = Backbone.HandlebarsView.extend({
+  template: <span class="string">'&lt;h1&gt;Hello&lt;/h1&gt;{{view "HelloView" model=this}}'</span>
+});
+
+<span class="keyword">var</span> HelloView = Backbone.HandlebarsView.extend({
+  template: <span class="string">'Hello {{name}}'</span>
+});
+
+<span class="keyword">var</span> app = <span class="keyword">new</span> AppView({model: <span class="keyword">new</span> User({name: <span class="string">'Loïc'</span>})});
+app.render().$el.appendTo(<span class="string">'#app'</span>);</code></pre>
+<h2>License</h2>
+<p>Copyright (c) 2013 <a href="https://github.com/loicfrering">Loïc Frering</a>, licensed
+under the MIT license. See the LICENSE file for more informations.
+</p>
+
+
+</body>
+</html>
