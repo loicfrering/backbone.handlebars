@@ -1,7 +1,8 @@
 Backbone.Handlebars
 ===================
 
-Backbone.Handlebars provides a solid integration of Handlebars into Backbone with:
+[Backbone.Handlebars](http://loicfrering.github.com/backbone.handlebars/)
+provides a solid integration of Handlebars into Backbone with:
 
 * Support for Backbone.Model: `{{user.name}}` compiles to `user.get('name')`
 * Support for Backbone.Collection: the `each` helper is able to iterate through
@@ -9,6 +10,11 @@ Backbone.Handlebars provides a solid integration of Handlebars into Backbone wit
 * Nested views: `<h1>User details</h1>{{view UserView model=user}}`
 * HandlebarsView: an extended BackboneView that automate the rendering of your
   empowered Handlebars templates.
+
+You can refer to the [project's website](http://loicfrering.github.com/backbone.handlebars/)
+for a nice HTML documentation.
+
+[![Build Status](https://secure.travis-ci.org/loicfrering/backbone.handlebars.png)](http://travis-ci.org/loicfrering/backbone.handlebars)
 
 Support for Backbone.Model
 --------------------------
@@ -75,6 +81,14 @@ var HelloView = Backbone.HandlebarsView.extend({
 var app = new AppView({model: new User({name: 'Loïc'})});
 app.render().$el.appendTo('#app');
 ```
+
+Tests
+-----
+
+Backbone.Handlebars is [tested](https://github.com/loicfrering/backbone.handlebars/tree/master/test),
+you can see its [test suite running online](test/).  Also, [Travis
+CI](https://travis-ci.org/) takes care of continuously running this test suite:
+[![Build Status](https://secure.travis-ci.org/loicfrering/backbone.handlebars.png)](http://travis-ci.org/loicfrering/backbone.handlebars).
 
 License
 -------
