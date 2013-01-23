@@ -39,10 +39,10 @@ describe('Helpers', function() {
 
     describe('view class resolution', function() {
 
-      it('should require the view by its name if not found in the global window object', function() {
+      it('should require the view by its name if not found in the global window object', function(done) {
         window.require = function() {
           arguments.length.should.equal(2);
-          arguments[0].should.equal('MyViewToRequire');
+          arguments[0].should.deep.equal(['MyViewToRequire']);
 
           var MyViewToRequire = Backbone.View.extend({
             render: function() {
@@ -50,12 +50,16 @@ describe('Helpers', function() {
             }
           });
 
-          arguments[1].should.be.an.instanceOf(Function);
-          arguments[1].call(window, MyViewToRequire);
+          var callback = arguments[1];
+          callback.should.be.an.instanceOf(Function);
+          setTimeout(function() {
+            callback.call(window, MyViewToRequire);
+            done();
+          }, 10);
         };
 
         var fn = Handlebars.compile('{{view "MyViewToRequire"}}');
-        fn().should.equal('<div>Hello World!</div>');
+        fn().should.equal('<div id="bbhbs-3"></div>');
 
         window.require = undefined;
       });

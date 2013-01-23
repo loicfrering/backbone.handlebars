@@ -22,7 +22,7 @@
   });
   window.HelloView = HelloView;
 
-  var users = new Users([new User({name: 'Riri'}), new User({name: 'Fifi'}), new User({name: 'Loulou'})]);
+  var users = new Users([new User({name: 'One'}), new User({name: 'Two'}), new User({name: 'Three'})]);
   var app = new AppView({collection: users});
   app.render().$el.appendTo('#app');
 
