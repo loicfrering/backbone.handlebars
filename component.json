@@ -1,0 +1,8 @@
+{
+  "name": "backbone.handlebars",
+  "version": "0.1.0",
+  "main": "dist/backbone.handlebars.min.js",
+  "dependencies": {
+    "backbone": "~0.9.9"
+  }
+}
