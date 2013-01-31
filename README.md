@@ -16,6 +16,21 @@ for a nice HTML documentation.
 
 [![Build Status](https://secure.travis-ci.org/loicfrering/backbone.handlebars.png)](http://travis-ci.org/loicfrering/backbone.handlebars)
 
+Download
+--------
+
+The raw sources can be navigated on [GitHub](https://github.com/loicfrering/backbone.handlebars).
+The distributed sources can be found in the `dist/` directory or
+downloaded directly via one of the following links:
+
+* Production minified version: [backbone.handlebars.min.js (v0.1.0)](https://raw.github.com/loicfrering/backbone.handlebars/v0.1.0/dist/backbone.handlebars.min.js).
+* Development version: [backbone.handlebars.js (v0.1.0)](https://raw.github.com/loicfrering/backbone.handlebars/v0.1.0/dist/backbone.handlebars.js).
+
+You can also use [Bower](http://twitter.github.com/bower/) to install
+backbone.handlebars:
+
+    $ bower install backbone.handlebars --save
+
 Support for Backbone.Model
 --------------------------
 

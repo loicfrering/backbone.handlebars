@@ -27,7 +27,7 @@ module.exports = function(grunt) {
           '<banner>',
           'src/intro.js',
           'src/ext.js',
-          'src/view.js', 'src/views/row.js', 'src/views/pagination.js',
+          'src/view.js',
           'src/helpers/*.js',
           'src/outro.js'
         ],
