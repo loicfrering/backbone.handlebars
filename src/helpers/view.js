@@ -24,12 +24,17 @@ Handlebars.registerHelper('view', function(name, options) {
 });
 
 function resolveViewClass(name, callback) {
+  var parts, i, len, obj;
   if (_.isFunction(name)) {
     callback(name);
     return;
   } else if (_.isString(name)) {
-    if (window[name]) {
-      callback(window[name]);
+    parts = name.split(".");
+    for (i = 0, len = parts.length, obj = window; i < len; ++i) {
+        obj = obj[parts[i]];
+    }
+    if (obj) {
+      callback(obj);
       return;
     } else if (typeof require !== 'undefined') {
       require([name], callback);

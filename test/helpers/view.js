@@ -17,6 +17,16 @@ describe('Helpers', function() {
         var fn = Handlebars.compile('{{view "MyView"}}');
         fn().should.equal('<div>Hello World!</div>');
 
+        window.MyView = {};
+        window.MyView.Nested = Backbone.View.extend({
+          render: function() {
+            this.$el.html('Hello Nested World!');
+          }
+        });
+
+        fn = Handlebars.compile('{{view "MyView.Nested"}}');
+        fn().should.equal('<div>Hello Nested World!</div>');
+
         window.MyView = undefined;
       });
 
@@ -59,7 +69,7 @@ describe('Helpers', function() {
         };
 
         var fn = Handlebars.compile('{{view "MyViewToRequire"}}');
-        fn().should.equal('<div id="bbhbs-3"></div>');
+        fn().should.equal('<div id="bbhbs-4"></div>');
 
         window.require = undefined;
       });
