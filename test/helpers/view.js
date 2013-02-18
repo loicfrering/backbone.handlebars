@@ -26,5 +26,10 @@ describe('Helpers', function() {
         }
       });
     });
+
+    it('should throw an error when a nested view is not used in a HandlebarView', function() {
+      var fn = Handlebars.compile('{{view "MyNestedView"}}');
+      fn.should.throw(Error);
+    });
   });
 });

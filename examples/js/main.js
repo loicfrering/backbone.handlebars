@@ -1,7 +1,6 @@
 require(['hello-view'], function(HelloView) {
 
-  var User = Backbone.Model.extend({
-  });
+  var User = Backbone.Model.extend();
 
   var Users = Backbone.Collection.extend({
     model: User

@@ -1,7 +1,6 @@
 (function(Backbone) {
 
-  var User = Backbone.Model.extend({
-  });
+  var User = Backbone.Model.extend();
 
   var Users = Backbone.Collection.extend({
     model: User
