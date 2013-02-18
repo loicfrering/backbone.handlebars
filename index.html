@@ -62,7 +62,7 @@ provides a solid integration of Handlebars into Backbone with:
 <li>Support for Backbone.Collection: the <code>each</code> helper is able to iterate through
 a Backbone.Collection.</li>
 <li>Nested views: <code>&lt;h1&gt;User details&lt;/h1&gt;{{view UserView model=user}}</code></li>
-<li>HandlebarsView: an extended BackboneView that automate the rendering of your
+<li>HandlebarsView: an extended Backbone.View that automate the rendering of your
 empowered Handlebars templates.</li>
 </ul>
 <p>You can refer to the <a href="http://loicfrering.github.com/backbone.handlebars/">project&#39;s website</a>
@@ -79,8 +79,8 @@ downloaded directly via one of the following links:
 
 </p>
 <ul>
-<li>Production minified version: <a href="https://raw.github.com/loicfrering/backbone.handlebars/v0.1.0/dist/backbone.handlebars.min.js">backbone.handlebars.min.js (v0.1.0)</a>.</li>
-<li>Development version: <a href="https://raw.github.com/loicfrering/backbone.handlebars/v0.1.0/dist/backbone.handlebars.js">backbone.handlebars.js (v0.1.0)</a>.</li>
+<li>Production minified version: <a href="https://raw.github.com/loicfrering/backbone.handlebars/v0.2.0/dist/backbone.handlebars.min.js">backbone.handlebars.min.js (v0.2.0)</a>.</li>
+<li>Development version: <a href="https://raw.github.com/loicfrering/backbone.handlebars/v0.2.0/dist/backbone.handlebars.js">backbone.handlebars.js (v0.2.0)</a>.</li>
 </ul>
 <p>You can also use <a href="http://twitter.github.com/bower/">Bower</a> to install
 backbone.handlebars:
@@ -110,20 +110,7 @@ through a Backbone.Collection:
 <span class="keyword">var</span> fn = Handlebars.compile(<span class="string">'&lt;ul&gt;{{#each numbers}}&lt;li&gt;{{number}}&lt;/li&gt;{{/each}}&lt;/ul&gt;'</span>);
 fn({numbers: numbers});
 <span class="comment">// &lt;ul&gt;&lt;li&gt;one&lt;/li&gt;&lt;li&gt;two&lt;/li&gt;&lt;li&gt;three&lt;/li&gt;&lt;li&gt;four&lt;/li&gt;&lt;/ul&gt;</span></code></pre>
-<h2>Nested views</h2>
-<pre><code class="lang-javascript"><span class="keyword">var</span> HelloView = Backbone.View.extend({
-  render: <span class="keyword">function</span>() {
-    <span class="keyword">this</span>.$el.html(<span class="string">'Hello '</span> + <span class="keyword">this</span>.model.get(<span class="string">'name'</span>) + <span class="string">'!'</span>);
-  }
-});
-
-<span class="keyword">var</span> fn = Handlebars.compile(<span class="string">'{{view HelloView model=user tagName="h1"}}'</span>);
-fn({
-  user: {name: <span class="string">'World'</span>},
-  HelloView: HelloView
-});
-<span class="comment">// &lt;h1&gt;Hello World!&lt;/h1&gt;</span></code></pre>
-<h2>HandlebarsView</h2>
+<h2>HandlebarsView and Nested Views</h2>
 <pre><code class="lang-javascript"><span class="keyword">var</span> User = Backbone.Model.extend();
 
 <span class="keyword">var</span> AppView = Backbone.HandlebarsView.extend({
@@ -143,6 +130,16 @@ CI</a> takes care of continuously running this test suite:
 <a href="http://travis-ci.org/loicfrering/backbone.handlebars"><img src="https://secure.travis-ci.org/loicfrering/backbone.handlebars.png" alt="Build Status"></a>.
 
 </p>
+<h2>Changelog</h2>
+<h3>0.2.0</h3>
+<ul>
+<li>Internal refactoring of nested views management.</li>
+<li>Support path notation for nested views lookup: <code>{{view &quot;My.Deep.View&quot;}}</code>.</li>
+</ul>
+<h3>0.1.0</h3>
+<ul>
+<li>Initial backbone.handlebars release.</li>
+</ul>
 <h2>License</h2>
 <p>Copyright (c) 2013 <a href="https://github.com/loicfrering">Loïc Frering</a>, licensed
 under the MIT license. See the LICENSE file for more informations.

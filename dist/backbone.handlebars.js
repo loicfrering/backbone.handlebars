@@ -1,4 +1,4 @@
-// backbone.handlebars v0.1.0
+// backbone.handlebars v0.2.0
 //
 // Copyright (c) 2013 Loïc Frering <loic.frering@gmail.com>
 // Distributed under the MIT license
@@ -20,10 +20,46 @@ var HandlebarsView = Backbone.View.extend({
     }
 
     if (_.isFunction(this.template)) {
-      var html = this.template(context);
+      var html = this.template(context, {data: {view: this}});
       this.$el.html(html);
     }
+    this.renderNestedViews();
     return this;
+  },
+
+  renderNestedViews: function() {
+    _.each(this.nestedViews, function(nestedView, id) {
+      this.resolveViewClass(nestedView.name, _.bind(function(viewClass) {
+        this.renderNestedView(id, viewClass, nestedView.options);
+      }, this));
+    }, this);
+  },
+
+  renderNestedView: function(id, viewClass, options) {
+    var $el = this.$('#' + id);
+    if ($el.size() === 1) {
+      var view = new viewClass(options);
+      $el.replaceWith(view.$el);
+      view.render();
+    }
+  },
+
+  resolveViewClass: function(name, callback) {
+    if (_.isFunction(name)) {
+      return callback(name);
+    } else if (_.isString(name)) {
+      var parts, i, len, obj;
+      parts = name.split(".");
+      for (i = 0, len = parts.length, obj = window; i < len; ++i) {
+          obj = obj[parts[i]];
+      }
+      if (obj) {
+        return callback(obj);
+      } else if (typeof require !== 'undefined') {
+        return require([name], callback);
+      }
+    }
+    throw new Error('Cannot resolve view "' + name + '"');
   },
 
   context: function() {
@@ -68,43 +104,20 @@ Handlebars.registerHelper('each', function(context, options) {
 uid = 1;
 
 Handlebars.registerHelper('view', function(name, options) {
-  var viewClass, view;
   var id = 'bbhbs-' + uid++;
-  resolveViewClass(name, function(resolvedViewClass) {
-    viewClass = resolvedViewClass;
 
-    var $el = $('#' + id);
-    if ($el.size() === 1) {
-      var view = new viewClass(options.hash);
-      $el.replaceWith(view.$el);
-      view.render();
-    }
-  });
-
-  if (viewClass) {
-    view = new viewClass(options.hash);
-    view.render();
-    return new Handlebars.SafeString(view.$el[0].outerHTML);
-  } else {
-    return new Handlebars.SafeString('<div id="' + id + '"></div>');
+  if (!options.data || !options.data.view) {
+    throw new Error('A nested view must be defined in a HandlebarsView.');
   }
+  var parentView = options.data.view;
+  parentView.nestedViews = parentView.nestedViews || {};
+  parentView.nestedViews[id] = {
+    name: name,
+    options: options.hash
+  };
+
+  return new Handlebars.SafeString('<div id="' + id + '"></div>');
 });
-
-function resolveViewClass(name, callback) {
-  if (_.isFunction(name)) {
-    callback(name);
-    return;
-  } else if (_.isString(name)) {
-    if (window[name]) {
-      callback(window[name]);
-      return;
-    } else if (typeof require !== 'undefined') {
-      require([name], callback);
-      return;
-    }
-  }
-  throw new Error('Cannot resolve view "' + name + '"');
-}
 
   Backbone.HandlebarsView = HandlebarsView;
 })();

@@ -1,6 +1,6 @@
 {
   "name": "backbone.handlebars",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Loïc Frering <loic.frering@gmail.com>",
   "description": "Backbone <3 Handlebars",
   "keywords": [
