@@ -16,7 +16,7 @@ var HandlebarsView = Backbone.View.extend({
 
   renderNestedViews: function() {
     _.each(this.nestedViews, function(nestedView, id) {
-      resolveViewClass(nestedView.name, _.bind(function(viewClass) {
+      this.resolveViewClass(nestedView.name, _.bind(function(viewClass) {
         this.renderNestedView(id, viewClass, nestedView.options);
       }, this));
     }, this);
@@ -35,7 +35,16 @@ var HandlebarsView = Backbone.View.extend({
     if (_.isFunction(name)) {
       return callback(name);
     } else if (_.isString(name)) {
-      return callback(window[name]);
+      var parts, i, len, obj;
+      parts = name.split(".");
+      for (i = 0, len = parts.length, obj = window; i < len; ++i) {
+          obj = obj[parts[i]];
+      }
+      if (obj) {
+        return callback(obj);
+      } else if (typeof require !== 'undefined') {
+        return require([name], callback);
+      }
     }
     throw new Error('Cannot resolve view "' + name + '"');
   },

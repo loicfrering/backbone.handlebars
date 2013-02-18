@@ -1,7 +1,6 @@
 describe('HandlebarsView', function() {
 
   describe('rendering', function() {
-
     it('should return itself', function() {
       var view = new HandlebarsView();
       view.render().should.equal(view);
@@ -20,6 +19,7 @@ describe('HandlebarsView', function() {
     });
 
     it('should render a string template', function() {
+      var originalCompile = Handlebars.compile;
       Handlebars.compile = function(template) {
         return function(context) {
           context.should.deep.equal({name: 'World', foo: 'bar'});
@@ -33,6 +33,8 @@ describe('HandlebarsView', function() {
 
       var view = new MyView({model: {name: 'World', foo: 'bar'}});
       view.render().$el.html().should.equal('Hello World!');
+
+      Handlebars.compile = originalCompile;
     });
   });
 
