@@ -1,1 +1,2 @@
 (function() {
+    var global = this;
