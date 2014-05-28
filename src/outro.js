@@ -1,2 +1,2 @@
   Backbone.HandlebarsView = HandlebarsView;
-})();
+}));
