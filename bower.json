@@ -3,6 +3,6 @@
   "version": "0.2.0",
   "main": "dist/backbone.handlebars.min.js",
   "dependencies": {
-    "backbone": "~0.9.9"
+    "backbone": "1.x"
   }
 }
