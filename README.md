@@ -23,8 +23,8 @@ The raw sources can be navigated on [GitHub](https://github.com/loicfrering/back
 The distributed sources can be found in the `dist/` directory or
 downloaded directly via one of the following links:
 
-* Production minified version: [backbone.handlebars.min.js (v0.2.0)](https://raw.github.com/loicfrering/backbone.handlebars/v0.2.0/dist/backbone.handlebars.min.js).
-* Development version: [backbone.handlebars.js (v0.2.0)](https://raw.github.com/loicfrering/backbone.handlebars/v0.2.0/dist/backbone.handlebars.js).
+* Production minified version: [backbone.handlebars.min.js (v0.2.1)](https://raw.github.com/loicfrering/backbone.handlebars/v0.2.1/dist/backbone.handlebars.min.js).
+* Development version: [backbone.handlebars.js (v0.2.1)](https://raw.github.com/loicfrering/backbone.handlebars/v0.2.1/dist/backbone.handlebars.js).
 
 You can also use [Bower](http://twitter.github.com/bower/) to install
 backbone.handlebars:
@@ -89,6 +89,10 @@ CI](https://travis-ci.org/) takes care of continuously running this test suite:
 
 Changelog
 ---------
+
+### 0.2.1
+
+* Update Bower dependencies.
 
 ### 0.2.0
 

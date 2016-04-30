@@ -1,4 +1,4 @@
-// backbone.handlebars v0.2.0
+// backbone.handlebars v0.2.1
 //
 // Copyright (c) 2013 Loïc Frering <loic.frering@gmail.com>
 // Distributed under the MIT license
