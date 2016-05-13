@@ -24,7 +24,7 @@ var HandlebarsView = Backbone.View.extend({
 
   renderNestedView: function(id, viewClass, options) {
     var $el = this.$('#' + id);
-    if ($el.size() === 1) {
+    if ($el.length === 1) {
       var view = new viewClass(options);
       $el.replaceWith(view.$el);
       view.render();
@@ -37,7 +37,7 @@ var HandlebarsView = Backbone.View.extend({
     } else if (_.isString(name)) {
       var parts, i, len, obj;
       parts = name.split(".");
-      for (i = 0, len = parts.length, obj = window; i < len; ++i) {
+      for (i = 0, len = parts.length, obj = global; i < len; ++i) {
           obj = obj[parts[i]];
       }
       if (obj) {
