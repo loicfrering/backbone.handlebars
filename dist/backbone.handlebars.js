@@ -3,7 +3,15 @@
 // Copyright (c) 2013 Loïc Frering <loic.frering@gmail.com>
 // Distributed under the MIT license
 
-(function() {
+(function(factory) {
+	if (typeof define === 'function' && define.amd) {
+		// AMD. Register as an anonymous module.
+		define(['backbone', 'Handlebars'], factory);
+	} else {
+	 	// Browser globals
+	 	factory(Backbone, Handlebars);
+	}
+}(function(Backbone, Handlebars) {
 
 var originalNameLookup = Handlebars.JavaScriptCompiler.prototype.nameLookup;
 
@@ -120,4 +128,4 @@ Handlebars.registerHelper('view', function(name, options) {
 });
 
   Backbone.HandlebarsView = HandlebarsView;
-})();
+}));
